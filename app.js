@@ -14,6 +14,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to REST API Node.js/Express/MySQL application." })
 })
 
+require("./user.routes.js")(app)
+
 // set port, listen for requests
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {

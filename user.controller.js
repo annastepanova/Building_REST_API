@@ -40,6 +40,22 @@ exports.findAll = (req, res) => {
   })
 }
 
+exports.findByUsername = (req, res) => {
+  User.getByName(req.query.username, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found User with name ${req.query.username}.`
+        })
+      } else {
+        res.status(500).send({
+          message: "Error retrieving User with username " + req.query.username
+        })
+      }
+    } else res.send(data)
+  })
+}
+
 // Find a single User with a userId
 exports.findOne = (req, res) => {
   User.findById(req.params.userId, (err, data) => {

@@ -4,6 +4,9 @@ module.exports = app => {
   // Create a new User
   app.post("/api/users", users.create)
 
+  // Search User by username
+  app.get("/api/users/search?", users.findByUsername)
+
   // Retrieve all Users
   app.get("/api/users", users.findAll)
 
@@ -18,4 +21,5 @@ module.exports = app => {
 
   // Create a new User
   app.delete("/api/users", users.deleteAll)
+
 }

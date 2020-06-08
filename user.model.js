@@ -52,6 +52,24 @@ User.getAll = result => {
   })
 }
 
+User.getByName = (name, result) => {
+  sql.query("SELECT * FROM users WHERE username = ?", [name], (err, res) => {
+    if (err) {
+      console.log("error: ", err)
+      result(null, err)
+      return
+    }
+
+    if (res.length) {
+      console.log("found users: ", res)
+      result(null, res)
+      return
+    }
+
+    result({ kind: "not_found" }, null)
+  })
+}
+
 User.updateById = (id, user, result) => {
   sql.query(
     "UPDATE users SET username = ?, email = ?, phone_number = ?, preferred_contact_method = ? WHERE id = ?",
